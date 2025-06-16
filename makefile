@@ -8,11 +8,13 @@ IDIR = ./include
 SRCDIR = ./src
 BUILDDIR = ./build
 
+EXEC = reslogd
+
 SRC = $(wildcard $(SRCDIR)/*.c)
 
-all: clean reslogd
+all: clean $(BUILDDIR)/$(EXEC)
 
-reslogd: $(SRC)
+$(BUILDDIR)/$(EXEC): $(SRC)
 	$(CC) $(CFLAGS) $(RELEASE) $(SRC) -o $@
 
 debug: $(SRC)
