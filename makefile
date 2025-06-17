@@ -12,7 +12,9 @@ EXEC = reslogd
 
 SRC = $(wildcard $(SRCDIR)/*.c)
 
-all: clean config script exec $(BUILDDIR)/$(EXEC)
+.PHONY: all clean config script exec debug
+
+all: clean config script $(BUILDDIR)/$(EXEC) exec
 
 $(BUILDDIR)/$(EXEC): $(SRC)
 	$(CC) $(CFLAGS) $(RELEASE) $(SRC) -o $@
@@ -24,6 +26,7 @@ config:
 	cp ./config/reslogd /etc/logrotate.d/
 
 script:
+	sudo chmod +x ./script/reslogd
 	cp ./script/reslogd /etc/init.d/
 
 exec:
