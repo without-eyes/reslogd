@@ -3,6 +3,8 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 #include <unistd.h>
 
 void create_daemon(void) {
@@ -43,6 +45,11 @@ char* get_command_output(const char* command) {
     FILE *pipeHandle = popen(command, "r");
     if (fgets(data, sizeof(data), pipeHandle) == NULL) {
         data[0] = '\0';
+    } else {
+        const size_t length = strlen(data);
+        if (length > 0 && data[length - 1] == '\n') {
+            data[length - 1] = '\0';
+        }
     }
     return data;
 }
@@ -52,5 +59,14 @@ void log_results(const char* cpuUsage, const char* ramUsage, const char* process
     if (log == NULL) {
         exit(EXIT_FAILURE);
     }
-    fprintf(log, "CPU: %s%%\tRAM: %sMiB\tProcesses: %s\n", cpuUsage, ramUsage, processCount);
+    fprintf(log, "[%s] CPU: %s%%\tRAM: %sMiB\tProcesses: %s\n", get_current_time(),cpuUsage, ramUsage, processCount);
+    fflush(log);
+}
+
+char* get_current_time(void) {
+    static char buffer[32];
+    const time_t rawTime = time(NULL);
+    const struct tm *timeInfo = localtime(&rawTime);
+    strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", timeInfo);
+    return buffer;
 }

@@ -11,4 +11,6 @@ char* get_command_output(const char* command);
 
 void log_results(const char* cpuUsage, const char* ramUsage, const char* processCount);
 
+char* get_current_time(void);
+
 #endif //RESLOGD_H
