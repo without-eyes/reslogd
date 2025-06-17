@@ -21,4 +21,4 @@ debug: $(SRC)
 	$(CC) $(CFLAGS) $(DEBUG) $(SRC) -o $@
 
 clean:
-	rm -rf ./reslogd
+	rm -rf ./build/*
