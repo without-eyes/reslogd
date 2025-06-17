@@ -12,13 +12,16 @@ EXEC = reslogd
 
 SRC = $(wildcard $(SRCDIR)/*.c)
 
-all: clean $(BUILDDIR)/$(EXEC)
+all: clean config $(BUILDDIR)/$(EXEC)
 
 $(BUILDDIR)/$(EXEC): $(SRC)
 	$(CC) $(CFLAGS) $(RELEASE) $(SRC) -o $@
 
 debug: $(SRC)
 	$(CC) $(CFLAGS) $(DEBUG) $(SRC) -o $@
+
+config:
+	cp ./config/reslogd /etc/logrotate.d/
 
 clean:
 	rm -rf ./build/*
