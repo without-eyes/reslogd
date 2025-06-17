@@ -8,5 +8,7 @@ int main(int argc, char* argv[]) {
         save_pid_to_file(argv[1]);
     }
 
+    run_daemon();
+
     return EXIT_SUCCESS;
 }
