@@ -14,8 +14,8 @@ void create_daemon(void) {
     }
 }
 
-void save_pid_to_file(const char* pathToPidFile) {
-    FILE* fd = fopen(pathToPidFile, "w");
+void save_pid_to_file(void) {
+    FILE* fd = fopen("/run/reslogd.pid", "w");
     if (fd == NULL) {
         exit(EXIT_FAILURE);
     }

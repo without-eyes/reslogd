@@ -3,7 +3,7 @@
 
 void create_daemon(void);
 
-void save_pid_to_file(const char* pathToPidFile);
+void save_pid_to_file(void);
 
 void run_daemon(void);
 

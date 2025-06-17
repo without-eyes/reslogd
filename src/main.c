@@ -1,14 +1,9 @@
 #include <stdlib.h>
 #include "../include/reslogd.h"
 
-int main(int argc, char* argv[]) {
+int main(void) {
     create_daemon();
-
-    if (argc == 2) {
-        save_pid_to_file(argv[1]);
-    }
-
+    save_pid_to_file();
     run_daemon();
-
     return EXIT_SUCCESS;
 }
