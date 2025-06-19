@@ -1,11 +1,13 @@
-if [ "$1" == "start" ]
+#!/bin/sh
+
+if [ "$1" = "start" ]
 then
 	/usr/bin/reslogd
-elif [ "$1" == "restart" ]
+elif [ "$1" = "restart" ]
 then
 	pkill reslogd
 	/usr/bin/reslogd
-elif [ "$1" == "stop" ]
+elif [ "$1" = "stop" ]
 then
 	pkill reslogd
 fi
